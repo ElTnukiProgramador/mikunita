@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Para Mikunita ❤</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --noche: #1a0510;
+    --vino: #4a0a22;
+    --carmesi: #9b1239;
+    --rosa: #ff6b94;
+    --rosa-palo: #ffd1dc;
+    --oro: #e6b85c;
+    --oro-claro: #f6dc9a;
+    --papel: #fff8ee;
+    --tinta: #4a1a2c;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 40px 16px 60px;
+    font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+    color: var(--tinta);
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(255, 107, 148, .28) 0%, transparent 55%),
+      radial-gradient(ellipse at 15% 100%, rgba(155, 18, 57, .55) 0%, transparent 55%),
+      radial-gradient(ellipse at 90% 80%, rgba(155, 18, 57, .4) 0%, transparent 50%),
+      var(--noche);
+    background-attachment: fixed;
+    overflow-x: hidden;
+  }
+
+  /* ============ Capa de corazones y pétalos ============ */
+  #capa {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .flota {
+    position: absolute;
+    bottom: -80px;
+    opacity: 0;
+    animation: subir linear forwards;
+    filter: drop-shadow(0 0 8px rgba(255, 107, 148, .7));
+  }
+  .flota svg { display: block; width: 100%; height: 100%; }
+
+  @keyframes subir {
+    0%   { transform: translate(0, 0) rotate(-10deg) scale(.7); opacity: 0; }
+    12%  { opacity: .9; }
+    50%  { transform: translate(28px, -55vh) rotate(10deg) scale(1); }
+    100% { transform: translate(-24px, -118vh) rotate(-8deg) scale(1.15); opacity: 0; }
+  }
+
+  .petalo {
+    position: absolute;
+    top: -40px;
+    width: 16px;
+    height: 20px;
+    background: radial-gradient(circle at 30% 30%, #ff8fae, #c2184d 70%);
+    border-radius: 150% 0 150% 0;
+    opacity: 0;
+    animation: caer linear forwards;
+  }
+
+  @keyframes caer {
+    0%   { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+    10%  { opacity: .9; }
+    50%  { transform: translate(60px, 55vh) rotate(220deg); }
+    100% { transform: translate(-30px, 112vh) rotate(480deg); opacity: .6; }
+  }
+
+  /* ============ Escena ============ */
+  .escena {
+    position: relative;
+    z-index: 2;
+    width: min(94vw, 520px);
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .invitacion {
+    font-family: "Great Vibes", cursive;
+    font-size: clamp(1.8rem, 7vw, 2.4rem);
+    color: var(--rosa-palo);
+    text-align: center;
+    text-shadow: 0 0 18px rgba(255, 107, 148, .55);
+    margin-bottom: 26px;
+    transition: opacity .5s ease, margin .5s ease, max-height .6s ease;
+    max-height: 120px;
+  }
+  .escena.abierta .invitacion { opacity: 0; max-height: 0; margin: 0; overflow: hidden; }
+
+  /* ============ Sobre ============ */
+  .sobre {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    background: linear-gradient(155deg, #b3123f 0%, #7d0b2d 100%);
+    border-radius: 8px;
+    box-shadow:
+      0 30px 60px rgba(0, 0, 0, .6),
+      0 0 60px rgba(255, 107, 148, .22),
+      inset 0 0 0 2px rgba(230, 184, 92, .55);
+    transition: transform .35s ease, opacity .8s ease, max-height 1s ease, margin .8s ease;
+    max-height: 600px;
+    animation: latir 2.6s ease-in-out infinite;
+  }
+  .sobre:hover { transform: scale(1.03); }
+  .sobre:focus-visible { outline: 3px solid var(--oro); outline-offset: 8px; }
+
+  @keyframes latir {
+    0%, 100% { box-shadow: 0 30px 60px rgba(0,0,0,.6), 0 0 40px rgba(255,107,148,.15), inset 0 0 0 2px rgba(230,184,92,.55); }
+    50%      { box-shadow: 0 30px 60px rgba(0,0,0,.6), 0 0 80px rgba(255,107,148,.4),  inset 0 0 0 2px rgba(230,184,92,.55); }
+  }
+
+  .sobre::before,
+  .sobre::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 50%;
+    height: 100%;
+    z-index: 3;
+  }
+  .sobre::before {
+    left: 0;
+    background: linear-gradient(155deg, #a10f38, #6e0927);
+    clip-path: polygon(0 0, 100% 100%, 0 100%);
+  }
+  .sobre::after {
+    right: 0;
+    background: linear-gradient(205deg, #a10f38, #6e0927);
+    clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  }
+
+  .tapa {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 62%;
+    background: linear-gradient(180deg, #c8184a, #9b1239);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: top;
+    transition: transform .8s ease, z-index 0s .4s;
+    z-index: 5;
+  }
+
+  .sello {
+    position: absolute;
+    top: 47%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    z-index: 6;
+    background: radial-gradient(circle at 35% 30%, #f6dc9a, #c9962f 70%);
+    box-shadow: 0 6px 14px rgba(0,0,0,.5), inset 0 0 0 3px rgba(255,255,255,.25);
+    transition: opacity .35s ease;
+  }
+  .sello svg { width: 30px; height: 30px; fill: #7d0b2d; }
+
+  .para-sobre {
+    position: absolute;
+    left: 0; right: 0;
+    bottom: 9%;
+    text-align: center;
+    z-index: 4;
+    font-family: "Great Vibes", cursive;
+    font-size: clamp(1.9rem, 8vw, 2.7rem);
+    color: var(--oro-claro);
+    text-shadow: 0 2px 10px rgba(0,0,0,.45);
+    line-height: 1;
+  }
+  .para-sobre small {
+    display: block;
+    font-family: "Cormorant Garamond", serif;
+    font-style: italic;
+    font-size: .95rem;
+    letter-spacing: .06em;
+    color: var(--rosa-palo);
+    margin-bottom: 4px;
+  }
+
+  .escena.abierta .tapa { transform: rotateX(180deg); z-index: 1; }
+  .escena.abierta .sello { opacity: 0; }
+  .escena.abierta .sobre {
+    animation: none;
+    opacity: 0;
+    max-height: 0;
+    margin: 0;
+    pointer-events: none;
+    transition-delay: .9s;
+  }
+
+  /* ============ Carta ============ */
+  .carta {
+    position: relative;
+    width: 100%;
+    display: none;
+    background:
+      radial-gradient(ellipse at 50% 0%, #fffdf8 0%, transparent 70%),
+      linear-gradient(180deg, #fff8ee, #fbeedd);
+    border-radius: 6px;
+    padding: 46px 34px 40px;
+    box-shadow:
+      0 40px 80px rgba(0, 0, 0, .65),
+      0 0 90px rgba(255, 107, 148, .3);
+  }
+  .escena.abierta .carta { display: block; animation: aparece 1.4s ease 1.1s both; }
+
+  @keyframes aparece {
+    from { opacity: 0; transform: translateY(60px) scale(.96); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* marco dorado interior */
+  .carta::before {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border: 1.5px solid var(--oro);
+    border-radius: 3px;
+    pointer-events: none;
+    opacity: .85;
+  }
+  .carta::after {
+    content: "";
+    position: absolute;
+    inset: 17px;
+    border: 1px solid rgba(230, 184, 92, .45);
+    border-radius: 2px;
+    pointer-events: none;
+  }
+
+  .adorno {
+    text-align: center;
+    color: var(--carmesi);
+    font-size: 1.1rem;
+    letter-spacing: .6em;
+    opacity: .75;
+  }
+
+  .para {
+    text-align: center;
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--tinta);
+    opacity: .8;
+    margin-top: 10px;
+  }
+
+  .nombre {
+    text-align: center;
+    font-family: "Great Vibes", cursive;
+    font-weight: 400;
+    font-size: clamp(3.6rem, 18vw, 5.6rem);
+    line-height: 1.05;
+    margin: 4px 0 6px;
+    background: linear-gradient(120deg, #9b1239 10%, #e0345f 45%, #ff6b94 60%, #9b1239 90%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 4px 10px rgba(155, 18, 57, .25));
+  }
+
+  .divisor {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+    margin: 6px 0 18px;
+    color: var(--carmesi);
+  }
+  .divisor::before, .divisor::after {
+    content: "";
+    height: 1px;
+    width: 70px;
+    background: linear-gradient(90deg, transparent, var(--oro), transparent);
+  }
+  .divisor svg { width: 18px; height: 18px; fill: var(--carmesi); }
+
+  .texto p {
+    font-size: clamp(1.2rem, 4.6vw, 1.38rem);
+    line-height: 1.7;
+    margin-top: 16px;
+    text-align: center;
+    max-width: 44ch;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0;
+  }
+  .escena.abierta .texto p { animation: leer 1s ease forwards; }
+  .escena.abierta .texto p:nth-child(1) { animation-delay: 2.4s; }
+  .escena.abierta .texto p:nth-child(2) { animation-delay: 3.8s; }
+  .escena.abierta .texto p:nth-child(3) { animation-delay: 5.2s; }
+  .escena.abierta .texto p:nth-child(4) { animation-delay: 6.8s; }
+  .escena.abierta .texto p:nth-child(5) { animation-delay: 8.2s; }
+
+  @keyframes leer {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .texto .fuego {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--carmesi);
+    padding: 14px 10px;
+    border-top: 1px solid rgba(230, 184, 92, .6);
+    border-bottom: 1px solid rgba(230, 184, 92, .6);
+  }
+
+  .texto .te-amo {
+    font-family: "Great Vibes", cursive;
+    font-size: clamp(2.3rem, 10vw, 3.2rem);
+    line-height: 1.15;
+    color: var(--carmesi);
+    margin-top: 26px;
+  }
+
+  .corazon-grande {
+    width: 58px;
+    height: 58px;
+    margin: 20px auto 0;
+    display: block;
+    opacity: 0;
+    filter: drop-shadow(0 0 14px rgba(255, 107, 148, .8));
+  }
+  .escena.abierta .corazon-grande {
+    animation: leer 1s ease 9.4s forwards, latido 1.3s ease-in-out 10.4s infinite;
+  }
+
+  @keyframes latido {
+    0%, 100% { transform: scale(1); }
+    15%      { transform: scale(1.22); }
+    30%      { transform: scale(1); }
+    45%      { transform: scale(1.16); }
+  }
+
+  .firma {
+    margin-top: 12px;
+    text-align: center;
+    opacity: 0;
+    font-style: italic;
+    font-size: 1.15rem;
+  }
+  .firma strong {
+    display: block;
+    font-family: "Great Vibes", cursive;
+    font-weight: 400;
+    font-size: 2.6rem;
+    color: var(--vino);
+    line-height: 1.1;
+    font-style: normal;
+  }
+  .escena.abierta .firma { animation: leer 1s ease 10s forwards; }
+
+  @media (max-width: 420px) {
+    .carta { padding: 40px 24px 34px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .flota, .petalo { display: none; }
+    .sobre { animation: none; }
+    .escena.abierta .carta,
+    .escena.abierta .texto p,
+    .escena.abierta .corazon-grande,
+    .escena.abierta .firma { animation-duration: 1ms; animation-delay: 0s !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Plantilla de corazón (se reutiliza) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="gCorazon" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff9db8"/>
+      <stop offset="1" stop-color="#e0245e"/>
+    </linearGradient>
+    <symbol id="corazon" viewBox="0 0 32 29">
+      <path d="M23.6 0c-3 0-5.6 1.6-7.6 4.2C14 1.6 11.400 0 8.400 0 3.700 0 0 3.700 0 8.400 0 15.600 8 20.800 16 29c8-8.200 16-13.400 16-20.600C32 3.700 28.300 0 23.600 0z"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div id="capa" aria-hidden="true"></div>
+
+<main class="escena" id="escena">
+  <p class="invitacion">Mikunita, hay una carta para ti…</p>
+
+  <button class="sobre" id="sobre" aria-label="Abrir la carta para Mikunita">
+    <div class="tapa"></div>
+    <div class="sello">
+      <svg viewBox="0 0 32 29"><use href="#corazon"/></svg>
+    </div>
+    <div class="para-sobre"><small>con todo mi amor, para</small>Mikunita</div>
+  </button>
+
+  <article class="carta" id="carta">
+    <div class="adorno">❦ ❦ ❦</div>
+    <p class="para">Para mi amor, para mi razón de sonreír</p>
+    <h1 class="nombre">Mikunita</h1>
+    <div class="divisor"><svg viewBox="0 0 32 29"><use href="#corazon"/></svg></div>
+
+    <div class="texto">
+      <p>
+        Hay personas que pasan por la vida y otras que la cambian para siempre.
+        Tú llegaste y te quedaste en mi piel, en mis pensamientos y en cada latido.
+        Despierto pensándote y me duermo buscándote.
+      </p>
+      <p>
+        Me enamoré de tu sonrisa, de tu mirada, de la forma en que haces callar
+        al mundo cuando estás cerca. Contigo el tiempo se detiene y mi corazón
+        se acelera como si fuera la primera vez.
+      </p>
+      <p class="fuego">
+        Te deseo con el alma y con el cuerpo. Me la pones bien dura y quiero
+        que esta noche te montes en esta verdura. 🔥
+      </p>
+      <p>
+        Quiero ser tu refugio, tu risa, tu locura favorita. Quiero amarte despacio,
+        besarte lento y quedarme a tu lado todas las noches que la vida me regale.
+      </p>
+      <p class="te-amo">Te amo, Mikunita, con todo lo que soy</p>
+    </div>
+
+    <svg class="corazon-grande" viewBox="0 0 32 29" fill="url(#gCorazon)"><use href="#corazon"/></svg>
+
+    <div class="firma">
+      Siempre tuyo,
+      <strong>Erick</strong>
+    </div>
+
+    <div class="adorno" style="margin-top:22px">❦ ❦ ❦</div>
+  </article>
+</main>
+
+<script>
+  const escena = document.getElementById('escena');
+  const sobre  = document.getElementById('sobre');
+  const capa   = document.getElementById('capa');
+  const reducir = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function lanzarCorazon() {
+    const tam = 14 + Math.random() * 34;
+    const el = document.createElement('div');
+    el.className = 'flota';
+    el.style.left = Math.random() * 100 + 'vw';
+    el.style.width = el.style.height = tam + 'px';
+    el.style.animationDuration = (6 + Math.random() * 6) + 's';
+    el.style.opacity = 0;
+    el.innerHTML = '<svg viewBox="0 0 32 29" fill="url(#gCorazon)"><use href="#corazon"/></svg>';
+    capa.appendChild(el);
+    el.addEventListener('animationend', () => el.remove());
+  }
+
+  function lanzarPetalo() {
+    const el = document.createElement('div');
+    el.className = 'petalo';
+    el.style.left = Math.random() * 100 + 'vw';
+    const s = .7 + Math.random() * .9;
+    el.style.width = 16 * s + 'px';
+    el.style.height = 20 * s + 'px';
+    el.style.animationDuration = (7 + Math.random() * 7) + 's';
+    capa.appendChild(el);
+    el.addEventListener('animationend', () => el.remove());
+  }
+
+  // Ambiente suave antes de abrir
+  if (!reducir) {
+    setInterval(lanzarCorazon, 1100);
+  }
+
+  function abrir() {
+    if (escena.classList.contains('abierta')) return;
+    escena.classList.add('abierta');
+    if (reducir) return;
+
+    // Ráfaga inicial
+    for (let i = 0; i < 24; i++) setTimeout(lanzarCorazon, i * 80);
+    for (let i = 0; i < 20; i++) setTimeout(lanzarPetalo, i * 120);
+
+    // Lluvia continua de pétalos y corazones
+    setInterval(lanzarPetalo, 500);
+    setInterval(lanzarCorazon, 700);
+  }
+
+  sobre.addEventListener('click', abrir);
+</script>
+</body>
+</html>
